@@ -1,0 +1,24 @@
+---
+- name: Set Nginx
+  hosts: web1
+  tasks:
+    - name: Add EPEL
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Install Nginx
+      yum:
+        name: nginx-1.16.1
+        state: installed
+
+    - name: Copy contents
+      copy:
+        src: ./sorry.html
+        dest: /usr/share/nginx/html/index.html
+        owner: ibmstudent
+
+    - name: Start Nginx
+      systemd:
+        state: stoped
+        name: nginx
