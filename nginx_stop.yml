@@ -20,5 +20,5 @@
 
     - name: Start Nginx
       systemd:
-        state: stoped
+        state: stopped
         name: nginx
