@@ -15,7 +15,7 @@
     - name: Copy contents
       copy:
         src: ./index.html
-        dest: /usr/share/nginx/html
+        dest: /usr/share/nginx/html/index.html
         owner: ibmstudent
 
     - name: Start Nginx
