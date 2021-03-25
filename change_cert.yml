@@ -12,7 +12,7 @@
       file:
         path: "/etc/httpd/{{ my_date }}"
         state: directoy
-        mode: 0644
+        mode: '0755'
 
     - name: (2) 現行証明書バックアップ
       copy:
