@@ -1,6 +1,9 @@
 ---
 - name: Set Apatch
   hosts: web1
+  vars:
+    basic_auth_user: ibmstudent
+    basic_auth_passwd: pass123456789 
   tasks:
     - name: Install Apache
       package:
@@ -14,7 +17,29 @@
         src: ./index.html
         dest: /var/www/html/index.html
         owner: ibmstudent
-
+    
+    - name: Copy basic.conf
+      copy:
+        src: ./basic.conf
+        dest: /etc/httpd/conf.d/basic.conf
+        owner: root
+        group: root
+        mode: 0644
+ #     notify: restart apache
+    
+    - name: "python-passlib installed"
+      pip:
+        name: passlib
+        
+    - name: "set basic auth"
+      htpasswd:
+        path: /var/www/html/.htpasswd
+        name: "{{ basic_auth_user }}"
+        password: "{{ basic_auth_passwd }}"
+        owner: root
+        group: apache
+        mode: 0640
+    
     - name: Start Apache
       service:
         state: restarted
