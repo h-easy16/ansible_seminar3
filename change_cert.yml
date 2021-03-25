@@ -6,7 +6,7 @@
   vars:
     my_date: "{{ lookup('pipe','date +%Y%m%d') }}"
     target_crt: "/etc/pki/tls/certs/localhost.crt"
-    target_key: "etc/pki/tls/certs/localhost.key"
+    target_key: "/etc/pki/tls/certs/localhost.key"
   tasks:
     - name: (1) バックアップディレクトリ作成
       file:
