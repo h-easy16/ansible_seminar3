@@ -30,7 +30,7 @@
     - name: "python-passlib installed"
       pip:
         name: passlib
-      executable: pip3
+        executable: pip3
         
     - name: "set basic auth"
       htpasswd:
