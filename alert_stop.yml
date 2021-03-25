@@ -1,0 +1,8 @@
+---
+- name: 監視抑止(dummy)
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: 監視抑止
+      debug:
+        msg: "監視抑止を実施します"
