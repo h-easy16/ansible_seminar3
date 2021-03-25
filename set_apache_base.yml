@@ -10,7 +10,7 @@
         name: 
           - httpd 
           - mod_ssl
-          - python3-pip
+          - python2-pip
         state: present
 
     - name: Copy contents
@@ -31,7 +31,6 @@
     - name: "python-passlib installed"
       pip:
         name: passlib
-        executable: pip3
         
     - name: "set basic auth"
       htpasswd:
