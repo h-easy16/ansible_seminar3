@@ -3,12 +3,8 @@
   hosts: all
   vars:
     my_command: "df -h"
+    my_date: "{{ lookup('pipe','date +%Y%m%d_%H:%M:%S') }}"
   tasks:
-    - name: 現在日時の取得
-      shell: date +%Y%m%d_%H:%M:%S
-      register: my_date
-      delegate_to: localhost
-
     - name: コマンド実行
       command: "{{ my_command }}"
       register: res
@@ -18,5 +14,5 @@
         path: /var/www/html/disk.info                     # 追記先のファイルパス
         create: yes                                       # ファイルがなければ作成
         insertbefore: BOF                                 # BOFを追加
-        marker: "# {mark}  {{ my_date.stdout }}  情報"    # マーカーとして日付情報を追加
+        marker: "# {mark}  {{ my_date }}  情報"    # マーカーとして日付情報を追加
         block: "{{ res.stdout }}"                         # 追記する情報（変数に格納したコマンド結果）
