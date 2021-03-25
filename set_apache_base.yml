@@ -1,0 +1,21 @@
+---
+- name: Set Apatch
+  hosts: web1
+  tasks:
+    - name: Install Apache
+      package:
+        name: 
+          - httpd 
+          - mod_ssl
+        state: present
+
+    - name: Copy contents
+      copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+        owner: ibmstudent
+
+    - name: Start Apache
+      service:
+        state: restarted
+        name: httpd
