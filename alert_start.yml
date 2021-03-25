@@ -1,0 +1,8 @@
+---
+- name: 監視再開(dummy)
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: 監視再開
+      debug:
+        msg: "監視を再開します"
