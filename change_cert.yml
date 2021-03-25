@@ -23,10 +23,10 @@
         - "{{ target_crt }}"
         - "{{ target_key }}"
 
-    - name: (3) バックアップ正常性確認
-      shell: |
-            "diff -s /etc/httpd/{{ my_date }}/localhost.crt {{ target_crt }}"
-            "diff -s /etc/httpd/{{ my_date }}/localhost.key {{ target_key }}"
+#    - name: (3) バックアップ正常性確認
+#      shell: |
+#            "diff -s /etc/httpd/{{ my_date }}/localhost.crt {{ target_crt }}"
+#            "diff -s /etc/httpd/{{ my_date }}/localhost.key {{ target_key }}"
 
     - name: (4) keyファイル更新
       copy:
