@@ -11,9 +11,8 @@
     - name: (1) バックアップディレクトリ作成
       file:
         path: "/etc/httpd/{{ my_date }}"
-        state: directoy
+        state: directory
         mode: '0755'
-        force: yes
 
     - name: (2) 現行証明書バックアップ
       copy:
