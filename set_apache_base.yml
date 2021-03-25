@@ -10,6 +10,7 @@
         name: 
           - httpd 
           - mod_ssl
+          - pip3
         state: present
 
     - name: Copy contents
