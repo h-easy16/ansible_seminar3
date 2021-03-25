@@ -1,0 +1,54 @@
+---
+- name: 証明書更新
+  hosts: all
+  become: yes
+  gather_facts: no
+  vars:
+    my_date: "{{ lookup('pipe','date +%Y%m%d') }}"
+    target_crt: "/etc/pki/tls/certs/localhost.crt"
+    target_key: "etc/pki/tls/certs/localhost.key"
+  tasks:
+    - name: (1) バックアップディレクトリ作成
+      file:
+        path: "/etc/httpd/{{ my_date }}"
+        state: directoy
+        mode: 0644
+
+    - name: (2) 現行証明書バックアップ
+      copy:
+        src: "{{ item }}"
+        dest: "/etc/httpd/{{ my_date }}/"
+        remote_src: yes
+      loop:
+        - "{{ target_crt }}"
+        - "{{ target_key }}"
+
+    - name: (3) バックアップ正常性確認
+      shell: |
+            "diff -s /etc/httpd/{{ my_date }}/localhost.crt {{ target_crt }}"
+            "diff -s /etc/httpd/{{ my_date }}/localhost.key {{ target_key }}"
+
+    - name: (4) keyファイル更新
+      copy:
+        src: ./files/server.key
+        dest: "{{ target_key }}"
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: (5) crtファイル更新
+      copy:
+        src: ./files/server.crt
+        dest: "{{ target_crt }}"
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: (6) コンフィグシンタックスチェック
+      shell: httpd -t
+
+    - name: (7) Apache再起動
+      service:
+        state: restarted
+        name: httpd
+      
