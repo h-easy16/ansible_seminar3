@@ -1,0 +1,23 @@
+---
+- name: Set Apatch
+  hosts: all
+  vars:
+    my_comment: "This is my commnet."
+  tasks:
+    - name: Install Apache
+      package:
+        name: 
+          - httpd 
+          - mod_ssl
+        state: present
+
+    - name: Copy contents
+      copy:
+        content: "{{ my_comment }}"
+        dest: /var/www/html/index.html
+        owner: ibmstudent
+        
+    - name: Start Apache
+      service:
+        state: restarted
+        name: httpd
