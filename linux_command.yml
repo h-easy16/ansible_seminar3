@@ -1,0 +1,21 @@
+---
+- name: linuxコマンド実行
+  hosts: all
+  vars: 
+    my_command: "dh -h"
+  gather_facts: no
+  tasks:
+    - name: コマンド実行
+      shell: "{{ my_command }}"
+      register: res
+      changed_when: no
+
+    - name: 実行結果出力
+      debug:
+        var=res.stdout_lines
+
+    - name: ファイル出力
+      copy:
+        content: "{{ res.stdout }}"
+        dest: "/var/www/html/disk.info"
+        
