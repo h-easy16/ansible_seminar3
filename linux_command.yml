@@ -2,7 +2,7 @@
 - name: linuxコマンド実行
   hosts: all
   vars: 
-    my_command: "dh -h"
+    my_command: "df -h"
   gather_facts: no
   tasks:
     - name: コマンド実行
