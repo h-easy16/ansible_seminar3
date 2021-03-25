@@ -1,6 +1,6 @@
 ---
 - name: Set Apatch
-  hosts: web1
+  hosts: all
   tasks:
     - name: Install Apache
       package:
@@ -11,7 +11,7 @@
 
     - name: Copy contents
       copy:
-        src: ./index.html
+        src: ./files/index.html
         dest: /var/www/html/index.html
         owner: ibmstudent
         
