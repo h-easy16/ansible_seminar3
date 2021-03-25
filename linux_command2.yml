@@ -1,0 +1,22 @@
+---
+- name: コマンド実行結果をファイルへ追記
+  hosts: all
+  vars:
+    my_command: "df -h"
+  tasks:
+    - name: 現在日時の取得
+      shell: date +%Y%m%d_%H:%M:%S
+      register: my_date
+      delegate_to: localhost
+
+    - name: コマンド実行
+      command: "{{ my_command }}"
+      register: res
+
+    - name: コマンド実行結果をファイルへ追記
+      blockinfile:
+        path: /var/www/html/disk.info
+        create: yes
+        insertbefore: BOF
+        marker: "# {mark}  {{ my_date.stdout }}  情報"
+        block: "{{ res.stdout }}"
