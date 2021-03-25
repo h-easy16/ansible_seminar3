@@ -15,8 +15,8 @@
 
     - name: コマンド実行結果をファイルへ追記
       blockinfile:
-        path: /var/www/html/disk.info
-        create: yes
-        insertbefore: BOF
-        marker: "# {mark}  {{ my_date.stdout }}  情報"
-        block: "{{ res.stdout }}"
+        path: /var/www/html/disk.info                     # 追記先のファイルパス
+        create: yes                                       # ファイルがなければ作成
+        insertbefore: BOF                                 # BOFを追加
+        marker: "# {mark}  {{ my_date.stdout }}  情報"    # マーカーとして日付情報を追加
+        block: "{{ res.stdout }}"                         # 追記する情報（変数に格納したコマンド結果）
