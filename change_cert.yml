@@ -14,41 +14,41 @@
         state: directory
         mode: '0755'
 
-    - name: (2) 現行証明書バックアップ
-      copy:
-        src: "{{ item }}"
-        dest: "/etc/httpd/{{ my_date }}/"
-        remote_src: yes
-      loop:
-        - "{{ target_crt }}"
-        - "{{ target_key }}"
+#    - name: (2) 現行証明書バックアップ
+#      copy:
+#        src: "{{ item }}"
+#        dest: "/etc/httpd/{{ my_date }}/"
+#        remote_src: yes
+#      loop:
+#        - "{{ target_crt }}"
+#        - "{{ target_key }}"
 
 #    - name: (3) バックアップ正常性確認
 #      shell: |
 #            "diff -s /etc/httpd/{{ my_date }}/localhost.crt {{ target_crt }}"
 #            "diff -s /etc/httpd/{{ my_date }}/localhost.key {{ target_key }}"
 
-    - name: (4) keyファイル更新
-      copy:
-        src: ./files/server.key
-        dest: "{{ target_key }}"
-        owner: root
-        group: root
-        mode: 0644
+#    - name: (4) keyファイル更新
+#      copy:
+#        src: ./files/server.key
+#        dest: "{{ target_key }}"
+#        owner: root
+#        group: root
+#        mode: 0644
 
-    - name: (5) crtファイル更新
-      copy:
-        src: ./files/server.crt
-        dest: "{{ target_crt }}"
-        owner: root
-        group: root
-        mode: 0644
+#    - name: (5) crtファイル更新
+#      copy:
+#        src: ./files/server.crt
+#        dest: "{{ target_crt }}"
+#        owner: root
+#        group: root
+#        mode: 0644
 
-    - name: (6) コンフィグシンタックスチェック
-      shell: httpd -t
+#    - name: (6) コンフィグシンタックスチェック
+#      shell: httpd -t
 
-    - name: (7) Apache再起動
-      service:
-        state: restarted
-        name: httpd
+#    - name: (7) Apache再起動
+#      service:
+#        state: restarted
+#        name: httpd
       
