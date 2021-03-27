@@ -1,5 +1,5 @@
 ---
-- name: Set Apatch
+- name: Webサーバセットアップ
   hosts: all
   tasks:
     - name: Install Apache
