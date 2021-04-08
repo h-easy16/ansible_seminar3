@@ -2,20 +2,20 @@
 - name: Webサーバセットアップ
   hosts: all
   tasks:
-    - name: Install Apache
+    - name: Apacheインストール
       package:
         name: 
           - httpd 
           - mod_ssl
         state: present
 
-    - name: Copy contents
+    - name: コンテンツの配信 
       copy:
         src: ./files/index.html
         dest: /var/www/html/index.html
         owner: ibmstudent
         
-    - name: Start Apache
+    - name: Apache起動
       service:
-        state: restarted
+        state: started
         name: httpd
