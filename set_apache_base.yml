@@ -13,7 +13,7 @@
       copy:
         src: ./files/index.html
         dest: /var/www/html/index.html
-        owner: ibmstudent
+        owner: "{{ ansible_user }}"
         
     - name: Apache起動
       service:
