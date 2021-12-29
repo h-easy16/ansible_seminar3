@@ -8,6 +8,10 @@
           - httpd 
           - mod_ssl
         state: present
+      register: res_httpd
+      retries: 15
+      delay: 15
+      until: res_httpd is success
 
     - name: コンテンツの配信 
       copy:
