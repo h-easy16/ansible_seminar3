@@ -15,7 +15,7 @@
       copy:
         content: "{{ my_comment }}"
         dest: /var/www/html/index.html
-        owner: ibmstudent
+        owner: "{{ ansible_user }}"
         
     - name: Start Apache
       service:

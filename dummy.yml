@@ -1,0 +1,7 @@
+---
+- name: dummy
+  hosts: all
+  tasks:
+    - name: dummy
+      debug:
+        msg: "test"

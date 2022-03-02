@@ -1,0 +1,9 @@
+---
+- name: restart process
+  hosts: all
+  vars_files:
+    - process_list.yml
+  tasks:
+    - name: restart 
+      debug:
+        msg: "{{ target }}を再起動しました"
