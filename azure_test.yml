@@ -1,0 +1,7 @@
+---
+- name: azure_mocule_check
+  hosts: all
+  tasks:
+    - name: azure_module_test
+      azure_rm_route_info:
+      
