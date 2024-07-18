@@ -3,11 +3,12 @@
   hosts: all
   tasks:
     - name: Apacheインストール
-      package:
+      dnf:
         name: 
           - httpd 
           - mod_ssl
         state: present
+        disable_gpg_check: true
       register: res_httpd
       retries: 15
       delay: 15
